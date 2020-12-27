@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "8b66d49d-241e-4f0f-8c88-ba3c4263abb2",
+		"name": "Tacx",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET all employee data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify status is success\", function () {\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"\r",
+							"console.log(jsonData.status);\r",
+							"\r",
+							"pm.environment.set(\"id\", jsonData.data[0].id);\r",
+							"console.log(pm.environment.get(\"id\"));\r",
+							"pm.environment.set(\"name\",jsonData.data[0].employee_name);\r",
+							"console.log(pm.environment.get(\"name\"));\r",
+							"pm.environment.set(\"salary\",jsonData.data[0].employee_salary);\r",
+							"console.log(pm.environment.get(\"salary\"));\r",
+							"pm.environment.set(\"age\",jsonData.data[0].employee_age);\r",
+							"console.log(pm.environment.get(\"age\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{tacxUrl}}/employees",
+					"host": [
+						"{{tacxUrl}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a single employee data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verify Status is success\", function () {\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify name\", function () {\r",
+							"    pm.expect(jsonData.data.employee_name).to.eql(pm.environment.get(\"name\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify salary\", function () {\r",
+							"    pm.expect(jsonData.data.employee_salary).to.eql(parseFloat(pm.environment.get(\"salary\")));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify age\", function () {\r",
+							"    pm.expect(jsonData.data.employee_age).to.eql(parseInt(pm.environment.get(\"age\")));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify id\", function () {\r",
+							"    pm.expect(jsonData.data.id).to.eql(parseInt(pm.environment.get(\"id\")));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{tacxUrl}}/employee/{{id}}",
+					"host": [
+						"{{tacxUrl}}"
+					],
+					"path": [
+						"employee",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create a new employee",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"newName\", \"test\");\r",
+							"pm.environment.set(\"newSalary\", \"123\");\r",
+							"pm.environment.set(\"newAge\", \"23\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has Created\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verify status is success\", function () {\r",
+							"   pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify message contains added\", function () {\r",
+							"   pm.expect(jsonData.message).to.includes(\"added\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify name is the given name\", function () {\r",
+							"   pm.expect(jsonData.data.name).to.eql(pm.environment.get(\"newName\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify salary is the given salary\", function () {\r",
+							"   pm.expect(jsonData.data.salary).to.eql(pm.environment.get(\"newSalary\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify age is the given age\", function () {\r",
+							"   pm.expect(jsonData.data.age).to.eql(pm.environment.get(\"newAge\"));\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"newId\", jsonData.data.id);\r",
+							"\r",
+							"console.log(pm.environment.get(\"newId\"));\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"{{newName}}\",\r\n    \"salary\":\"{{newSalary}}\",\r\n    \"age\":\"{{newAge}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{tacxUrl}}/create",
+					"host": [
+						"{{tacxUrl}}"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update a new employee",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"updateName\", \"testUpdate\");\r",
+							"pm.environment.set(\"updateSalary\", \"123123\");\r",
+							"pm.environment.set(\"updateAge\", \"2323\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has Created\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verify status is success\", function () {\r",
+							"   pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify message contains added\", function () {\r",
+							"   pm.expect(jsonData.message).to.includes(\"updated\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify name is the given name\", function () {\r",
+							"   pm.expect(jsonData.data.name).to.eql(pm.environment.get(\"updateName\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify salary is the given salary\", function () {\r",
+							"   pm.expect(jsonData.data.salary).to.eql(pm.environment.get(\"updateSalary\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify age is the given age\", function () {\r",
+							"   pm.expect(jsonData.data.age).to.eql(pm.environment.get(\"updateAge\"));\r",
+							"});\r",
+							"\r",
+							"console.log(pm.environment.get(\"newId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"{{updateName}}\",\r\n    \"salary\":\"{{updateSalary}}\",\r\n    \"age\":\"{{updateAge}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{tacxUrl}}/update/{{newId}}",
+					"host": [
+						"{{tacxUrl}}"
+					],
+					"path": [
+						"update",
+						"{{newId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Delete the new employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verify the employee is deleted\", function () {\r",
+							"    pm.expect(jsonData.message).to.include(\"deleted\");\r",
+							"});\r",
+							"pm.test(\"Status code name has OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify data number is deleted id\", function () {\r",
+							"    pm.expect(parseInt(jsonData.data)).to.eql(pm.environment.get(\"newId\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{tacxUrl}}/delete/{{newId}}",
+					"host": [
+						"{{tacxUrl}}"
+					],
+					"path": [
+						"delete",
+						"{{newId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

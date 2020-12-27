@@ -1,0 +1,94 @@
+{
+	"id": "3ee42cb9-7945-40f3-8745-042c059e09a0",
+	"values": [
+		{
+			"key": "hrurl",
+			"value": "100.25.34.235:1000/ords/hr",
+			"enabled": true
+		},
+		{
+			"key": "spartanurl",
+			"value": "100.25.34.235:8000",
+			"enabled": true
+		},
+		{
+			"key": "cburl",
+			"value": "http://api.cybertektraining.com",
+			"enabled": true
+		},
+		{
+			"key": "base_url",
+			"value": "http://54.90.101.103:8000/",
+			"enabled": true
+		},
+		{
+			"key": "tacxUrl",
+			"value": "http://dummy.restapiexample.com/api/v1",
+			"enabled": true
+		},
+		{
+			"key": "base_url_2",
+			"value": "http://54.161.137.82:8000",
+			"enabled": true
+		},
+		{
+			"key": "age",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "salary",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newAge",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newSalary",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newEmployeeId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "updateId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "updateName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "updateSalary",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"name": "My Workspace Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2020-12-27T18:26:45.943Z",
+	"_postman_exported_using": "Postman/7.36.1"
+}

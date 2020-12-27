@@ -1,0 +1,74 @@
+{
+	"id": "7e3a4b65-0603-416f-a2cf-30b49fa825c3",
+	"name": "Tacxxxx",
+	"values": [
+		{
+			"key": "id",
+			"value": "333",
+			"enabled": true
+		},
+		{
+			"key": "id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "myId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "age",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "salary",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newAge",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newSalary",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "newId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "updateAge",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "updateName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "updateSalary",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-12-27T18:27:23.137Z",
+	"_postman_exported_using": "Postman/7.36.1"
+}
